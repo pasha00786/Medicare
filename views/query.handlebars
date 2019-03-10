@@ -1,0 +1,57 @@
+  <script type="text/javascript">
+  	var d = document.getElementById("queries");
+	d.className = "active";
+	var element = document.getElementById("dashboard");
+    element.classList.remove("active");
+  </script>
+  {{#if patient}}
+	  {{#each data}}
+	    <div class="well">
+	    	<ul class="list-group">
+			  <li class="list-group-item">Doctor Name: {{dr_name}}</li>
+			  <li class="list-group-item">Date of Appointment: {{dda}}</li>
+			  <li class="list-group-item">Status: {{approved}}</li>
+			  <li class="list-group-item">Time Alotted: {{tpd}}</li>
+			</ul>
+		</div>
+	  {{/each}}
+  {{else}}
+  		{{#each data}}
+	    <div class="well">
+	    	<form class="form-horizontal" action="/users/query/approve?id={{id}}" method="POST">
+			  <div class="form-group">
+			    <label class="control-label col-sm-2">Patient Name:</label>
+			    <div class="col-sm-10">
+			      <input type="text" class="form-control" value="{{patient_name}}">
+			    </div>
+			  </div>
+			  <div class="form-group">
+			    <label class="control-label col-sm-2">Date of Appointment:</label>
+			    <div class="col-sm-10"> 
+			      <input type="text" class="form-control" value="{{dda}}" >
+			    </div> 
+			  </div>
+			   <div class="form-group">
+			    <label class="control-label col-sm-2">Status:</label>
+			    <div class="col-sm-10"> 
+			      <input type="text" class="form-control" value="{{approved}}" disabled="true">
+			    </div> 
+			  </div>
+			   <div class="form-group">
+			    <label class="control-label col-sm-2">Allot Time:</label>
+			    <div class="col-sm-10"> 
+			      <input type="text" class="form-control" value="{{tpd}}" name="tpd" placeholder="hh:mm(AM/PM)" required="true">
+			    </div> 
+			  </div>
+			  <div class="form-group"> 
+			    <div class="col-sm-offset-2 col-sm-10">
+			      <button type="submit" class="btn btn-default">Approve</button>
+			    </div>
+			  </div>
+			</form>
+			<form action="/users/query/reject?id={{id}}" method="POST">
+				<center><button type="submit" class="btn btn-danger" id="reject">Reject</button></center>
+			</form>
+		</div>
+	  {{/each}}
+  {{/if}}

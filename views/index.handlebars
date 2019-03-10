@@ -1,0 +1,39 @@
+<script type="text/javascript">
+  	var d = document.getElementById("dashboard");
+	d.className = "active";
+	var element = document.getElementById("queries");
+    element.classList.remove("active");
+  </script>
+{{#if errors}}
+      {{#each errors}}
+        <div class="alert alert-danger">{{msg}}</div>
+      {{/each}}
+{{/if}}
+{{#if result}}
+	<h2 class="page-header">{{user.name}}</h2>
+	<p> 
+		 Please fill the query form:
+		 <br>
+		 <form method="post" action="/users/query">
+		   <div class="form-group">
+		    <label>Name</label>
+		    <input type="text" class="form-control" placeholder="Name" name="name" value="{{user.name}}">
+		  </div>
+		  <div class="form-group">
+		    <label>Doctor's Name</label>
+		    <input type="text" class="form-control" placeholder="Fullname without any prefix all small" name="dr_name">
+		  </div>
+		   <div class="form-group">
+		    <label>Desired Appointment Date</label>
+		    <input type="text" class="form-control" placeholder="dd-mm-yyyy" name="dda">
+		  </div>
+		  <div class="form-group">
+		    <label>Mobile</label>
+		    <input type="text" class="form-control" placeholder="Mobile" name="mobile" value="{{user.mobile}}">
+		  </div>
+		  <button type="submit" class="btn btn-default">Submit</button>
+		</form>
+	</p>
+{{else}}
+<h2 class="page-header"> Dr. {{user.name}}</h2>
+{{/if}}
